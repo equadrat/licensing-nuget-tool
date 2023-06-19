@@ -22,8 +22,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="equadrat.Framework.Core" Version="6.0.5" />
-    <PackageReference Include="equadrat.Framework.Core.Interfaces" Version="6.0.5" />
+    <PackageReference Include="equadrat.Framework.Core" Version="6.0.6" />
+    <PackageReference Include="equadrat.Framework.Core.Interfaces" Version="6.0.6" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
