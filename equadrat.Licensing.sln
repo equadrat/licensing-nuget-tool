@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{717690DF-D79F-4A41-B0A0-922A18C9741D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subject", "Subject", "{3559BA2B-8CF9-405F-AE23-FD638CB91F87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{67D2D8A1-12B0-4393-97EC-9A3D481C24F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "equadrat.Licensing.UnitTests", "Tests\UnitTests\equadrat.Licensing.UnitTests.csproj", "{C1DFDCC7-F34D-46C7-BA3A-AD9B7E81BC94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "equadrat.Licensing.CLI", "Source\CLI\equadrat.Licensing.CLI.csproj", "{0AD45D97-FB9F-4E38-B909-EC695C94D86D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommandLineParser", "CommandLineParser", "{047388A0-C6CA-4761-8130-4BEF7D532DC8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "equadrat.Licensing.CommandLineParser.Interfaces", "Source\CommandLineParser.Interfaces\equadrat.Licensing.CommandLineParser.Interfaces.csproj", "{AAB2E18C-1F2F-4389-9DB0-7DABC5E1931C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "equadrat.Licensing.CommandLineParser", "Source\CommandLineParser\equadrat.Licensing.CommandLineParser.csproj", "{AF5D8E25-B7B8-466D-ACB0-92BD72E798C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModuleSelector", "ModuleSelector", "{86BF2690-9212-465F-B6EC-65FA5142BB89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "equadrat.Licensing.ModuleSelector", "Source\ModuleSelector\equadrat.Licensing.ModuleSelector.csproj", "{15609DA9-2909-4342-B22D-0B5BB14A2459}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commands", "Commands", "{32146FBE-9CB8-40A6-A0BB-B85D5555DC51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "equadrat.Licensing.Commands", "Source\Commands\equadrat.Licensing.Commands.csproj", "{5D22E2C7-9DF7-4D2D-B073-045FCB627E05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CLI", "CLI", "{77B2B345-75E1-4A50-9064-CACD0F0A3D96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1DFDCC7-F34D-46C7-BA3A-AD9B7E81BC94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1DFDCC7-F34D-46C7-BA3A-AD9B7E81BC94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1DFDCC7-F34D-46C7-BA3A-AD9B7E81BC94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1DFDCC7-F34D-46C7-BA3A-AD9B7E81BC94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD45D97-FB9F-4E38-B909-EC695C94D86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD45D97-FB9F-4E38-B909-EC695C94D86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD45D97-FB9F-4E38-B909-EC695C94D86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD45D97-FB9F-4E38-B909-EC695C94D86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB2E18C-1F2F-4389-9DB0-7DABC5E1931C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB2E18C-1F2F-4389-9DB0-7DABC5E1931C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB2E18C-1F2F-4389-9DB0-7DABC5E1931C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB2E18C-1F2F-4389-9DB0-7DABC5E1931C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF5D8E25-B7B8-466D-ACB0-92BD72E798C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5D8E25-B7B8-466D-ACB0-92BD72E798C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5D8E25-B7B8-466D-ACB0-92BD72E798C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5D8E25-B7B8-466D-ACB0-92BD72E798C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15609DA9-2909-4342-B22D-0B5BB14A2459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15609DA9-2909-4342-B22D-0B5BB14A2459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15609DA9-2909-4342-B22D-0B5BB14A2459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15609DA9-2909-4342-B22D-0B5BB14A2459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D22E2C7-9DF7-4D2D-B073-045FCB627E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D22E2C7-9DF7-4D2D-B073-045FCB627E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D22E2C7-9DF7-4D2D-B073-045FCB627E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D22E2C7-9DF7-4D2D-B073-045FCB627E05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C1DFDCC7-F34D-46C7-BA3A-AD9B7E81BC94} = {67D2D8A1-12B0-4393-97EC-9A3D481C24F1}
+		{0AD45D97-FB9F-4E38-B909-EC695C94D86D} = {77B2B345-75E1-4A50-9064-CACD0F0A3D96}
+		{047388A0-C6CA-4761-8130-4BEF7D532DC8} = {3559BA2B-8CF9-405F-AE23-FD638CB91F87}
+		{AAB2E18C-1F2F-4389-9DB0-7DABC5E1931C} = {047388A0-C6CA-4761-8130-4BEF7D532DC8}
+		{AF5D8E25-B7B8-466D-ACB0-92BD72E798C2} = {047388A0-C6CA-4761-8130-4BEF7D532DC8}
+		{86BF2690-9212-465F-B6EC-65FA5142BB89} = {3559BA2B-8CF9-405F-AE23-FD638CB91F87}
+		{15609DA9-2909-4342-B22D-0B5BB14A2459} = {86BF2690-9212-465F-B6EC-65FA5142BB89}
+		{32146FBE-9CB8-40A6-A0BB-B85D5555DC51} = {3559BA2B-8CF9-405F-AE23-FD638CB91F87}
+		{5D22E2C7-9DF7-4D2D-B073-045FCB627E05} = {32146FBE-9CB8-40A6-A0BB-B85D5555DC51}
+		{77B2B345-75E1-4A50-9064-CACD0F0A3D96} = {3559BA2B-8CF9-405F-AE23-FD638CB91F87}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {712C6244-641A-4656-8C21-6CF943783290}
+	EndGlobalSection
+EndGlobal

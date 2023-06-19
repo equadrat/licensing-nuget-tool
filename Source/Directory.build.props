@@ -1,0 +1,133 @@
+<Project>
+  <Import Project="..\company.build.props" />
+  <Import Project="..\product.build.props" />
+
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageIcon>images\$(PackageIconFileName)</PackageIcon>
+    <PackageLicenseFile>$(PackageLicenseFileName)</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <OutputPath>..\bin\$(Configuration)</OutputPath>
+
+    <SignAssembly Condition="Exists('$(AssemblyOriginatorKeyFilePath)')">True</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(AssemblyOriginatorKeyFilePath)</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ProjectPackageTagsFileName>Tags.Project.txt</ProjectPackageTagsFileName>
+    <ProjectPackageTagsFilePath>$(ProjectDir)Properties\Package\$(ProjectPackageTagsFileName)</ProjectPackageTagsFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Properties\Build" />
+    <Folder Include="Properties\Package" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.company.cs" Link="Properties\AssemblyInfo.company.cs" />
+    <Compile Include="..\..\AssemblyInfo.product.cs" Link="Properties\AssemblyInfo.product.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(AssemblyOriginatorKeyFilePath)" Link="Properties\Build\$(AssemblyOriginatorKeyFileName)" Condition="Exists('$(AssemblyOriginatorKeyFilePath)')" />
+
+    <None Include="..\..\company.build.props" Link="Properties\Build\company.build.props" />
+    <None Include="..\..\product.build.props" Link="Properties\Build\product.build.props" />
+    <None Include="..\Directory.build.props" Link="Properties\Build\Directory.build.props" />
+
+    <None Include="..\..\NuGet.config" Link="Properties\Build\NuGet.config" />
+
+    <None Include="$(CodeAnalysisRuleSet)" Link="Properties\Build\StyleCop.ruleset" />
+
+    <EditorConfigFiles Include="$(SharedEditorConfigFilePath)" Link="Properties\Build\VisualStudio.editorconfig" />
+    <None Include="$(SharedFileNestingConfigFilePath)" Link="Properties\Build\VisualStudio.filenesting.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(PackageIconFilePath)" Link="Properties\Package\Icon.png">
+      <PackagePath>$(PackageIcon)</PackagePath>
+      <Pack>True</Pack>
+    </None>
+
+    <None Include="$(PackageLicenseFilePath)" Link="Properties\Package\License.md">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
+
+    <None Include="$(PackageReleaseNotesFilePath)" Link="Properties\Package\Release-Notes.txt">
+      <PackagePath></PackagePath>
+      <Pack>true</Pack>
+    </None>
+
+    <None Include="$(SolutionPackageTagsFilePath)" Link="Properties\Package\Tags.Solution.txt">
+      <PackagePath></PackagePath>
+      <Pack>false</Pack>
+    </None>
+
+    <None Include="$(ProjectPackageTagsFilePath)" Condition="Exists('$(ProjectPackageTagsFilePath)')">
+      <PackagePath></PackagePath>
+      <Pack>false</Pack>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CreateDefaultFolders" AfterTargets="PreBuildEvent">
+    <MakeDir Directories="$(ProjectDir)Properties" Condition="!Exists('$(ProjectDir)Properties')" />
+    <MakeDir Directories="$(ProjectDir)Properties\Build" Condition="!Exists('$(ProjectDir)Properties\Build')" />
+    <MakeDir Directories="$(ProjectDir)Properties\Package" Condition="!Exists('$(ProjectDir)Properties\Package')" />
+  </Target>
+
+  <Target Name="CopyEditorConfig" AfterTargets="ResolveProjectReferences">
+    <Copy SourceFiles="$(SharedEditorConfigFilePath)" DestinationFolder="..\.." SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopyFileNestingConfig" AfterTargets="ResolveProjectReferences">
+    <Copy SourceFiles="$(SharedFileNestingConfigFilePath)" DestinationFolder="..\.." SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="PreparePackageDescriptionFromFile" BeforeTargets="GenerateNuspec">
+    <ReadLinesFromFile File="$(PackageDescriptionFilePath)">
+      <Output TaskParameter="Lines" ItemName="PackageDescriptionLines" />
+    </ReadLinesFromFile>
+
+    <PropertyGroup>
+      <PackageDescription>@(PackageDescriptionLines, '%0a')</PackageDescription>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
+    <ReadLinesFromFile File="$(PackageReleaseNotesFilePath)">
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+    </ReadLinesFromFile>
+
+    <PropertyGroup>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="PreparePackageTagsFromFile" BeforeTargets="GenerateNuspec">
+    <ReadLinesFromFile File="$(SolutionPackageTagsFilePath)">
+      <Output TaskParameter="Lines" ItemName="SolutionTagsLines" />
+    </ReadLinesFromFile>
+
+    <ReadLinesFromFile File="$(ProjectPackageTagsFilePath)" Condition="Exists('$(ProjectPackageTagsFilePath)')">
+      <Output TaskParameter="Lines" ItemName="ProjectTagsLines" />
+    </ReadLinesFromFile>
+
+    <PropertyGroup>
+      <PackageTags>@(SolutionTagsLines, '%0a') @(ProjectTagsLines, '%0a')</PackageTags>
+    </PropertyGroup>
+  </Target>
+</Project>

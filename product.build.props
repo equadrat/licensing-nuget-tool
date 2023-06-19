@@ -1,0 +1,92 @@
+<Project>
+  <Import Project="version.build.props" />
+
+  <PropertyGroup>
+    <DotNet7TargetFrameworks>net7.0</DotNet7TargetFrameworks>
+    <DotNet7WindowsTargetFrameworks>net7.0-windows</DotNet7WindowsTargetFrameworks>
+    <DotNet7AndNewerTargetFrameworks>$(DotNet7TargetFrameworks)</DotNet7AndNewerTargetFrameworks>
+    <DotNet7AndNewerWindowsTargetFrameworks>$(DotNet7WindowsTargetFrameworks)</DotNet7AndNewerWindowsTargetFrameworks>
+
+    <DotNet6TargetFrameworks>net6.0</DotNet6TargetFrameworks>
+    <DotNet6WindowsTargetFrameworks>net6.0-windows</DotNet6WindowsTargetFrameworks>
+    <DotNet6AndNewerTargetFrameworks>$(DotNet7AndNewerTargetFrameworks);$(DotNet6TargetFrameworks)</DotNet6AndNewerTargetFrameworks>
+    <DotNet6AndNewerWindowsTargetFrameworks>$(DotNet7AndNewerWindowsTargetFrameworks);$(DotNet6WindowsTargetFrameworks)</DotNet6AndNewerWindowsTargetFrameworks>
+
+    <DotNet5TargetFrameworks>net5.0</DotNet5TargetFrameworks>
+    <DotNet5WindowsTargetFrameworks>net5.0-windows</DotNet5WindowsTargetFrameworks>
+    <DotNet5AndNewerTargetFrameworks>$(DotNet6AndNewerTargetFrameworks);$(DotNet5TargetFrameworks)</DotNet5AndNewerTargetFrameworks>
+    <DotNet5AndNewerWindowsTargetFrameworks>$(DotNet6AndNewerWindowsTargetFrameworks);$(DotNet5WindowsTargetFrameworks)</DotNet5AndNewerWindowsTargetFrameworks>
+
+    <DotNet3TargetFrameworks>netcoreapp3.1</DotNet3TargetFrameworks>
+    <DotNet3AndNewerTargetFrameworks>$(DotNet5AndNewerTargetFrameworks);$(DotNet3TargetFrameworks)</DotNet3AndNewerTargetFrameworks>
+    <DotNet3AndNewerWindowsTargetFrameworks>$(DotNet5AndNewerWindowsTargetFrameworks);$(DotNet3TargetFrameworks)</DotNet3AndNewerWindowsTargetFrameworks>
+
+    <DotNetLegacyTargetFrameworks>net48;net472;net471;net47;net462</DotNetLegacyTargetFrameworks>
+    <DotNetLegacyAndNewerTargetFrameworks>$(DotNet3AndNewerTargetFrameworks);$(DotNetLegacyTargetFrameworks)</DotNetLegacyAndNewerTargetFrameworks>
+    <DotNetLegacyAndNewerWindowsTargetFrameworks>$(DotNet3AndNewerWindowsTargetFrameworks);$(DotNetLegacyTargetFrameworks)</DotNetLegacyAndNewerWindowsTargetFrameworks>
+
+    <DotNetStandardTargetFrameworks>netstandard2.1;netstandard2.0</DotNetStandardTargetFrameworks>
+
+    <DotNetStandardAndNewerTargetFrameworks>$(DotNet5AndNewerTargetFrameworks);$(DotNetStandardTargetFrameworks)</DotNetStandardAndNewerTargetFrameworks>
+
+    <ProjectStandardTargetFrameworks>$(DotNetStandardAndNewerTargetFrameworks)</ProjectStandardTargetFrameworks>
+    <ProjectTargetFrameworks>$(DotNet3AndNewerTargetFrameworks)</ProjectTargetFrameworks>
+    <ProjectWindowsTargetFrameworks>$(DotNet3AndNewerWindowsTargetFrameworks)</ProjectWindowsTargetFrameworks>
+
+    <ProjectMauiTargetFrameworks>$(DotNet7AndNewerTargetFrameworks)</ProjectMauiTargetFrameworks>
+
+    <ProjectMauiAndroidTargetFrameworks>net7.0-android</ProjectMauiAndroidTargetFrameworks>
+    <ProjectMauiIOSTargetFrameworks>net7.0-ios</ProjectMauiIOSTargetFrameworks>
+    <ProjectMauiMacCatalystTargetFrameworks>net7.0-maccatalyst</ProjectMauiMacCatalystTargetFrameworks>
+    <ProjectMauiWindowsTargetFrameworks>net7.0-windows10.0.19041.0</ProjectMauiWindowsTargetFrameworks>
+
+    <ProjectMauiPlatformTargetFrameworks>$(ProjectMauiTargetFrameworks);$(ProjectMauiAndroidTargetFrameworks);$(ProjectMauiIOSTargetFrameworks);$(ProjectMauiMacCatalystTargetFrameworks)</ProjectMauiPlatformTargetFrameworks>
+    <ProjectMauiPlatformTargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(ProjectMauiPlatformTargetFrameworks);$(ProjectMauiWindowsTargetFrameworks)</ProjectMauiPlatformTargetFrameworks>
+
+    <SupportedOSPlatformVersion Condition="$(UseMaui) == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$(UseMaui) == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$(UseMaui) == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$(UseMaui) == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$(UseMaui) == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="$(UseMaui) == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <SuppressTfmSupportBuildWarnings>false</SuppressTfmSupportBuildWarnings>
+
+    <RunAnalyzers>true</RunAnalyzers>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <CodeAnalysisRuleSet>..\..\CodeStyle\StyleCop\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+
+    <SharedEditorConfigFile>.editorconfig</SharedEditorConfigFile>
+    <SharedEditorConfigFilePath>..\..\CodeStyle\VisualStudio\$(SharedEditorConfigFile)</SharedEditorConfigFilePath>
+
+    <SharedFileNestingConfigFile>.filenesting.json</SharedFileNestingConfigFile>
+    <SharedFileNestingConfigFilePath>..\..\CodeStyle\VisualStudio\$(SharedFileNestingConfigFile)</SharedFileNestingConfigFilePath>
+
+    <AssemblyOriginatorKeyFileName>equadrat.Licensing.snk</AssemblyOriginatorKeyFileName>
+    <AssemblyOriginatorKeyFilePath>..\..\Build\Resources\$(AssemblyOriginatorKeyFileName)</AssemblyOriginatorKeyFilePath>
+
+    <PackageProjectUrl>https://www.equadrat.net</PackageProjectUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+
+    <PackageDescriptionFileName>$(SolutionName).Description.txt</PackageDescriptionFileName>
+    <PackageDescriptionFilePath>..\..\$(PackageDescriptionFileName)</PackageDescriptionFilePath>
+
+    <PackageIconFileName>equadrat.Licensing.Icon.png</PackageIconFileName>
+    <PackageIconFilePath>..\..\Build\Resources\$(PackageIconFileName)</PackageIconFilePath>
+    <PackageIconUrl>https://www.equadrat.net/wp-content/uploads/equadrat.Licensing.Icon.png</PackageIconUrl>
+
+    <PackageLicenseFileName>$(SolutionName).License.md</PackageLicenseFileName>
+    <PackageLicenseFilePath>..\..\$(PackageLicenseFileName)</PackageLicenseFilePath>
+
+    <PackageReleaseNotesFileName>$(SolutionName).ReleaseNotes.txt</PackageReleaseNotesFileName>
+    <PackageReleaseNotesFilePath>..\..\$(PackageReleaseNotesFileName)</PackageReleaseNotesFilePath>
+
+    <SolutionPackageTagsFileName>$(SolutionName).Tags.txt</SolutionPackageTagsFileName>
+    <SolutionPackageTagsFilePath>..\..\$(SolutionPackageTagsFileName)</SolutionPackageTagsFilePath>
+
+    <DefaultItemExcludes>$(DefaultItemExcludes);**\.gitkeep</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>
