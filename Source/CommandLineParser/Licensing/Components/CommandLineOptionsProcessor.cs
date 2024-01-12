@@ -90,7 +90,7 @@ namespace e2.Licensing.Components
 
             try
             {
-                return await handler.HandleObject(options);
+                return await handler.HandleObject(options).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

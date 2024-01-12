@@ -34,7 +34,7 @@ namespace e2.Licensing.Components
         /// <inheritdoc />
         async Task<ICommandLineHandlerResult> ICommandLineOptionsHandler.HandleObject(object options)
         {
-            return await this.Handle((TOptions)options);
+            return await this.Handle((TOptions)options).ConfigureAwait(false);
         }
     }
 }

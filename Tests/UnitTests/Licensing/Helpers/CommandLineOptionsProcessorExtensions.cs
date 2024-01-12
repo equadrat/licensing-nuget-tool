@@ -32,7 +32,7 @@ namespace e2.Licensing.Helpers
             if (commandLine == null) throw new ArgumentNullException(nameof(commandLine));
             if (CommandLineUtilities.SplitCommandLineIntoArguments(commandLine, out var args)) throw new ArgumentException(nameof(commandLine));
 
-            return await processor.HandleAsync(args);
+            return await processor.HandleAsync(args).ConfigureAwait(false);
         }
     }
 }

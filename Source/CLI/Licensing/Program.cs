@@ -36,7 +36,7 @@ namespace e2.Licensing
 
                 try
                 {
-                    var result = await processor.HandleAsync(args);
+                    var result = await processor.HandleAsync(args).ConfigureAwait(false);
                     if (!string.IsNullOrEmpty(result.Message)) Console.WriteLine(result.Message);
                     exitCode = result.ExitCode ?? (result.Success ? 0 : -1);
                 }

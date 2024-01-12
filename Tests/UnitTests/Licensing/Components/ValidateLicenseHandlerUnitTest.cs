@@ -43,17 +43,17 @@ namespace e2.Licensing.Components
         {
             async Task Test(ICommandLineOptionsProcessor processor, string path)
             {
-                await NewLicenseKeyPair(processor, path);
-                await NewTemplate(processor, path);
-                await SignTemplate(processor, path);
-                await ValidateLicense(processor);
+                await NewLicenseKeyPair(processor, path).ConfigureAwait(false);
+                await NewTemplate(processor, path).ConfigureAwait(false);
+                await SignTemplate(processor, path).ConfigureAwait(false);
+                await ValidateLicense(processor).ConfigureAwait(false);
             }
 
             static async Task NewLicenseKeyPair(ICommandLineOptionsProcessor processor, string path)
             {
                 const string commandLine = "k --public public.key --private private.key --password \"MyPassword\"";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 if (!result.Success || !File.Exists(Path.Combine(path, "public.key")) || !File.Exists(Path.Combine(path, "private.key"))) Assert.Inconclusive(nameof(NewLicenseKeyPairHandlerUnitTest));
             }
 
@@ -61,7 +61,7 @@ namespace e2.Licensing.Components
             {
                 var commandLine = $"t --template template-{format}.txt --format \"{format}\"";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 if (!result.Success || !File.Exists(Path.Combine(path, $"template-{format}.txt"))) Assert.Inconclusive(nameof(NewTemplateHandlerUnitTest));
             }
 
@@ -69,7 +69,7 @@ namespace e2.Licensing.Components
             {
                 var commandLine = $"s --template template-{format}.txt --license license-{format}.txt --format \"{format}\" --private private.key --password \"MyPassword\"";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 if (!result.Success || !File.Exists(Path.Combine(path, $"license-{format}.txt"))) Assert.Inconclusive(nameof(SignLicenseHandlerUnitTest));
             }
 
@@ -77,11 +77,11 @@ namespace e2.Licensing.Components
             {
                 var commandLine = $"v --license license-{format}.txt --format \"{format}\" --public public.key";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 Assert.IsTrue(result.Success);
             }
 
-            await this.RunTestAsync(Test);
+            await this.RunTestAsync(Test).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -98,17 +98,17 @@ namespace e2.Licensing.Components
         {
             async Task Test(ICommandLineOptionsProcessor processor, string path)
             {
-                await NewLicenseKeyPair(processor, path);
-                await NewTemplate(processor, path);
-                await SignTemplate(processor, path);
-                await ValidateLicense(processor);
+                await NewLicenseKeyPair(processor, path).ConfigureAwait(false);
+                await NewTemplate(processor, path).ConfigureAwait(false);
+                await SignTemplate(processor, path).ConfigureAwait(false);
+                await ValidateLicense(processor).ConfigureAwait(false);
             }
 
             static async Task NewLicenseKeyPair(ICommandLineOptionsProcessor processor, string path)
             {
                 const string commandLine = "k --public public.key --private private.key --password \"MyPassword\"";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 if (!result.Success || !File.Exists(Path.Combine(path, "public.key")) || !File.Exists(Path.Combine(path, "private.key"))) Assert.Inconclusive(nameof(NewLicenseKeyPairHandlerUnitTest));
             }
 
@@ -116,7 +116,7 @@ namespace e2.Licensing.Components
             {
                 var commandLine = $"t --template template-{format}.txt --format \"{format}\"";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 if (!result.Success || !File.Exists(Path.Combine(path, $"template-{format}.txt"))) Assert.Inconclusive(nameof(NewTemplateHandlerUnitTest));
             }
 
@@ -124,7 +124,7 @@ namespace e2.Licensing.Components
             {
                 var commandLine = $"s --template template-{format}.txt --license license-{format}.txt --format \"{format}\" --private private.key --password \"MyPassword\"";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 if (!result.Success || !File.Exists(Path.Combine(path, $"license-{format}.txt"))) Assert.Inconclusive(nameof(SignLicenseHandlerUnitTest));
 
                 // Change the license.
@@ -148,12 +148,12 @@ namespace e2.Licensing.Components
             {
                 var commandLine = $"v --license license-{format}.txt --format \"{format}\" --public public.key";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 Assert.IsFalse(result.Success);
                 Assert.AreEqual(-5, result.ExitCode);
             }
 
-            await this.RunTestAsync(Test);
+            await this.RunTestAsync(Test).ConfigureAwait(false);
         }
     }
 }

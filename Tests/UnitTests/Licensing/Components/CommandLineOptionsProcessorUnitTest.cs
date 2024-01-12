@@ -73,7 +73,7 @@ namespace e2.Licensing.Components
         public async Task HandleAsync_01()
         {
             var instance = this.CreateInstance(inconclusive: false);
-            var result = await instance.HandleAsync(new[] { "--help" });
+            var result = await instance.HandleAsync(new[] { "--help" }).ConfigureAwait(false);
             Assert.IsTrue(result.Success);
             Assert.IsNull(result.Message);
             Assert.IsNull(result.ExitCode);
@@ -89,7 +89,7 @@ namespace e2.Licensing.Components
         public async Task HandleAsync_02()
         {
             var instance = this.CreateInstance(inconclusive: false);
-            var result = await instance.HandleAsync(new[] { "--version" });
+            var result = await instance.HandleAsync(new[] { "--version" }).ConfigureAwait(false);
             Assert.IsTrue(result.Success);
             Assert.IsNull(result.Message);
             Assert.IsNull(result.ExitCode);

@@ -43,13 +43,13 @@ namespace e2.Licensing.Components
             {
                 var commandLine = $"t --template template-{format}.txt --format \"{format}\"";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 Assert.IsTrue(result.Success);
 
                 Assert.IsTrue(File.Exists(Path.Combine(path, $"template-{format}.txt")));
             }
 
-            await this.RunTestAsync(Test);
+            await this.RunTestAsync(Test).ConfigureAwait(false);
         }
     }
 }

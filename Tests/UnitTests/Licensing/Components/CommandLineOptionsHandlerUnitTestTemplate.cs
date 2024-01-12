@@ -64,7 +64,7 @@ namespace e2.Licensing.Components
 
                 try
                 {
-                    await callback.Invoke(commandLineOptionsProcessor, path);
+                    await callback.Invoke(commandLineOptionsProcessor, path).ConfigureAwait(false);
                 }
                 finally
                 {

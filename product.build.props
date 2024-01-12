@@ -2,10 +2,15 @@
   <Import Project="version.build.props" />
 
   <PropertyGroup>
+    <DotNet8TargetFrameworks>net8.0</DotNet8TargetFrameworks>
+    <DotNet8WindowsTargetFrameworks>net8.0-windows</DotNet8WindowsTargetFrameworks>
+    <DotNet8AndNewerTargetFrameworks>$(DotNet8TargetFrameworks)</DotNet8AndNewerTargetFrameworks>
+    <DotNet8AndNewerWindowsTargetFrameworks>$(DotNet8WindowsTargetFrameworks)</DotNet8AndNewerWindowsTargetFrameworks>
+
     <DotNet7TargetFrameworks>net7.0</DotNet7TargetFrameworks>
     <DotNet7WindowsTargetFrameworks>net7.0-windows</DotNet7WindowsTargetFrameworks>
-    <DotNet7AndNewerTargetFrameworks>$(DotNet7TargetFrameworks)</DotNet7AndNewerTargetFrameworks>
-    <DotNet7AndNewerWindowsTargetFrameworks>$(DotNet7WindowsTargetFrameworks)</DotNet7AndNewerWindowsTargetFrameworks>
+    <DotNet7AndNewerTargetFrameworks>$(DotNet8AndNewerTargetFrameworks);$(DotNet7TargetFrameworks)</DotNet7AndNewerTargetFrameworks>
+    <DotNet7AndNewerWindowsTargetFrameworks>$(DotNet8AndNewerWindowsTargetFrameworks);$(DotNet7WindowsTargetFrameworks)</DotNet7AndNewerWindowsTargetFrameworks>
 
     <DotNet6TargetFrameworks>net6.0</DotNet6TargetFrameworks>
     <DotNet6WindowsTargetFrameworks>net6.0-windows</DotNet6WindowsTargetFrameworks>
@@ -33,12 +38,12 @@
     <ProjectTargetFrameworks>$(DotNet3AndNewerTargetFrameworks)</ProjectTargetFrameworks>
     <ProjectWindowsTargetFrameworks>$(DotNet3AndNewerWindowsTargetFrameworks)</ProjectWindowsTargetFrameworks>
 
-    <ProjectMauiTargetFrameworks>$(DotNet7AndNewerTargetFrameworks)</ProjectMauiTargetFrameworks>
+    <ProjectMauiTargetFrameworks>$(DotNet8TargetFrameworks);$(DotNet7TargetFrameworks);$(DotNet6TargetFrameworks)</ProjectMauiTargetFrameworks>
 
-    <ProjectMauiAndroidTargetFrameworks>net7.0-android</ProjectMauiAndroidTargetFrameworks>
-    <ProjectMauiIOSTargetFrameworks>net7.0-ios</ProjectMauiIOSTargetFrameworks>
-    <ProjectMauiMacCatalystTargetFrameworks>net7.0-maccatalyst</ProjectMauiMacCatalystTargetFrameworks>
-    <ProjectMauiWindowsTargetFrameworks>net7.0-windows10.0.19041.0</ProjectMauiWindowsTargetFrameworks>
+    <ProjectMauiAndroidTargetFrameworks>net8.0-android;net7.0-android</ProjectMauiAndroidTargetFrameworks>
+    <ProjectMauiIOSTargetFrameworks>net8.0-ios;net7.0-ios</ProjectMauiIOSTargetFrameworks>
+    <ProjectMauiMacCatalystTargetFrameworks>net8.0-maccatalyst;net7.0-maccatalyst</ProjectMauiMacCatalystTargetFrameworks>
+    <ProjectMauiWindowsTargetFrameworks>net8.0-windows10.0.19041.0;net7.0-windows10.0.19041.0</ProjectMauiWindowsTargetFrameworks>
 
     <ProjectMauiPlatformTargetFrameworks>$(ProjectMauiTargetFrameworks);$(ProjectMauiAndroidTargetFrameworks);$(ProjectMauiIOSTargetFrameworks);$(ProjectMauiMacCatalystTargetFrameworks)</ProjectMauiPlatformTargetFrameworks>
     <ProjectMauiPlatformTargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(ProjectMauiPlatformTargetFrameworks);$(ProjectMauiWindowsTargetFrameworks)</ProjectMauiPlatformTargetFrameworks>
@@ -50,6 +55,7 @@
     <TargetPlatformMinVersion Condition="$(UseMaui) == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
     <SupportedOSPlatformVersion Condition="$(UseMaui) == 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 
+    <CheckEolWorkloads>false</CheckEolWorkloads>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
     <SuppressTfmSupportBuildWarnings>false</SuppressTfmSupportBuildWarnings>
 
@@ -57,6 +63,9 @@
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
     <CodeAnalysisRuleSet>..\..\CodeStyle\StyleCop\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+
+    <SharedStyleCopSettingsFile>.stylecop.json</SharedStyleCopSettingsFile>
+    <SharedStyleCopSettingsFilePath>..\..\CodeStyle\StyleCop\$(SharedStyleCopSettingsFile)</SharedStyleCopSettingsFilePath>
 
     <SharedEditorConfigFile>.editorconfig</SharedEditorConfigFile>
     <SharedEditorConfigFilePath>..\..\CodeStyle\VisualStudio\$(SharedEditorConfigFile)</SharedEditorConfigFilePath>
@@ -70,6 +79,9 @@
     <PackageProjectUrl>https://www.equadrat.net</PackageProjectUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+
+    <PackageReadmeFileName>README.md</PackageReadmeFileName>
+    <PackageReadmeFilePath>..\..\$(PackageReadmeFileName)</PackageReadmeFilePath>
 
     <PackageDescriptionFileName>$(SolutionName).Description.txt</PackageDescriptionFileName>
     <PackageDescriptionFilePath>..\..\$(PackageDescriptionFileName)</PackageDescriptionFilePath>

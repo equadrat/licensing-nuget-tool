@@ -1,4 +1,17 @@
 ====
+v0.1.3
+====
+
+- Updated package references.
+- Added .net 8 support.
+
+====
+v0.1.2
+====
+
+- Updated package references.
+
+====
 v0.1.1
 ====
 

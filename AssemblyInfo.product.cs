@@ -45,7 +45,7 @@ namespace e2
         /// <remarks>
         /// Use Major.Minor.Revision.
         /// </remarks>
-        public const string Version = "0.1.1";
+        public const string Version = "0.1.3";
 
         /// <summary>
         /// The build identifier.

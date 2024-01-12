@@ -39,14 +39,14 @@ namespace e2.Licensing.Components
             {
                 const string commandLine = "k --public public.key --private private.key --password \"MyPassword\"";
 
-                var result = await processor.HandleAsync(commandLine);
+                var result = await processor.HandleAsync(commandLine).ConfigureAwait(false);
                 Assert.IsTrue(result.Success);
 
                 Assert.IsTrue(File.Exists(Path.Combine(path, "public.key")));
                 Assert.IsTrue(File.Exists(Path.Combine(path, "private.key")));
             }
 
-            await this.RunTestAsync(Test);
+            await this.RunTestAsync(Test).ConfigureAwait(false);
         }
     }
 }

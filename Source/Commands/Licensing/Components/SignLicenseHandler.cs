@@ -76,9 +76,10 @@ namespace e2.Licensing.Components
             // Restore the factory.
             ICoreLicenseFactory licenseFactory;
             using (var fileStream = new FileStream(options.PrivateKeyFile, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var password = new CoreSecureArray<char>(options.PrivateKeyPassword.ToCharArray(), ownsArray: true))
             {
                 Console.WriteLine($"PrivateKey file: {fileStream.Name}");
-                licenseFactory = this._licenseOperator.RestoreFactory(fileStream, options.PrivateKeyPassword);
+                licenseFactory = this._licenseOperator.RestoreFactory(fileStream, password.Value);
 
                 fileStream.Close();
             }

@@ -1,4 +1,5 @@
 ﻿using e2.Framework.Components;
+using e2.Framework.Models;
 using e2.Licensing.Helpers;
 using e2.Licensing.Models;
 using System;
@@ -48,8 +49,9 @@ namespace e2.Licensing.Components
             var factory = this._licenseOperator.CreateFactory();
 
             using (var fileStream = new FileStream(options.PrivateKeyFile, FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (var password = new CoreSecureArray<char>(options.PrivateKeyPassword.ToCharArray(), ownsArray: true))
             {
-                factory.SavePrivateKey(fileStream, options.PrivateKeyPassword);
+                factory.SavePrivateKey(fileStream, password.Value);
 
                 fileStream.Flush();
                 fileStream.Close();
